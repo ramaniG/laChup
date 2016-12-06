@@ -1,7 +1,5 @@
 import {createApp} from 'mantra-core';
 import initContext from './configs/context';
-import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
 
 // modules
 import coreModule from './modules/core';

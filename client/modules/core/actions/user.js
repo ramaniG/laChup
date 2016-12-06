@@ -1,19 +1,24 @@
+import { Random } from 'meteor/random'
+
 export default {
-  userSetAdditonalInfo({Meteor, LocalState, FlowRouter}, pUserId, pAge, pIcNo, pPhoneNo) {
-    if (!pUserId || !pAge || !pIcNo || !pPhoneNo) {
-      return LocalState.set('SAVING_ERROR', 'Invalid or empty info.');
+  userAddFacebook({Meteor, LocalState, FlowRouter}, firstname, lastname, email, gender, facebookid) {
+    if (!firstname || !lastname || !email || !facebookid) {
+      return LocalState.set('SAVING_ERROR', 'Not a valid facebook account!');
     }
 
     LocalState.set('SAVING_ERROR', null);
 
-    Meteor.call('user.setAdditionalInfo', pUserId, pAge, pIcNo, pPhoneNo , (err) => {
+    const id = Random.id();
+    // There is a method stub for this in the config/method_stubs
+    // That's how we are doing latency compensation
+    Meteor.call('user.add.facebook', id, firstname, lastname, email, gender, facebookid, (err) => {
       if (err) {
         return LocalState.set('SAVING_ERROR', err.message);
       }
     });
-
-    FlowRouter.go('entitytypeselect');
+    FlowRouter.go(`/registerpersonalinfo/${id}`);
   },
+
   clearErrors({LocalState}) {
     return LocalState.set('SAVING_ERROR', null);
   }

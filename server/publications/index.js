@@ -1,7 +1,5 @@
-import Entity from './entity';
-import User from './user';
+import entity from './entity';
 
 export default function () {
-  Entity();
-  User();
+  entity();
 }
