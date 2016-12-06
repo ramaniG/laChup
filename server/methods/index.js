@@ -1,5 +1,7 @@
-import ticket from './ticket';
+import Ticket from './ticket';
+import User from './user';
 
 export default function () {
-  ticket();
+  Ticket();
+  User();
 }
