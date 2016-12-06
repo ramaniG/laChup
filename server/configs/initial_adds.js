@@ -1,8 +1,12 @@
-import {State, Country, Entity, Site, ServiceCounter, ServiceType} from '/lib/collections';
+import {State, Country, EntityType, Entity, Site, ServiceCounter, ServiceType} from '/lib/collections';
+import { ServiceConfiguration } from 'meteor/service-configuration';
+import { AccountsCommon, AccountsServer } from 'meteor/accounts-base';
 
 export default function () {
   addCountry();
   addStates();
+  addEntityType();
+
   var entityID = addEntity();
   if (entityID){
     var siteID = addSites(entityID);
@@ -15,6 +19,17 @@ export default function () {
   if (serviceID){
     addServiceCounter(siteID, serviceID.id1, serviceID.id2);
   }
+
+  ServiceConfiguration.configurations.upsert({
+    service: 'facebook',
+  }, {
+    $set: {
+      loginStyle: 'popup',
+      requestOfflineToken: false,
+      appId: '346579145719171',
+      secret: 'bf5e14f880059c9a08e0a68b2e276297',
+    },
+  });
 }
 
 function addCountry() {
@@ -213,6 +228,56 @@ function addStates() {
   }
 }
 
+function addEntityType() {
+  if (!EntityType.findOne())
+  {
+    EntityType.insert({
+      _id : "1",
+      name : "Banking",
+      createdAt : new Date(),
+      createdBy : 0,
+      updatedAt : new Date(),
+      updatedBy : 0
+    });
+
+    EntityType.insert({
+      _id : "2",
+      name : "Telecommunications",
+      createdAt : new Date(),
+      createdBy : 0,
+      updatedAt : new Date(),
+      updatedBy : 0
+    });
+
+    EntityType.insert({
+      _id : "3",
+      name : "Restaurant",
+      createdAt : new Date(),
+      createdBy : 0,
+      updatedAt : new Date(),
+      updatedBy : 0
+    });
+
+    EntityType.insert({
+      _id : "4",
+      name : "Entertainment",
+      createdAt : new Date(),
+      createdBy : 0,
+      updatedAt : new Date(),
+      updatedBy : 0
+    });
+
+    EntityType.insert({
+      _id : "5",
+      name : "Utilities",
+      createdAt : new Date(),
+      createdBy : 0,
+      updatedAt : new Date(),
+      updatedBy : 0
+    });
+  }
+}
+
 function addEntity() {
   if (!Entity.findOne())
   {
@@ -222,7 +287,7 @@ function addEntity() {
       _id : id,
       name : "Telecom A",
       shortname : "TA",
-      type : "Telecom",
+      entitytypeid : "1",
       createdAt : new Date(),
       createdBy : 0,
       updatedAt : new Date(),
