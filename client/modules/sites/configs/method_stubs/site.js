@@ -1,11 +1,16 @@
 export default function ({Collections, Meteor}) {
   Meteor.methods({
-    'maintenance.createSite'(_id, name, location) {
+    'maintenance.createSite'(pId, pName, pLocation) {
+      check(pId, String);
+      check(pName, String);
+      check(pLocation, String);
       //const saving = true;
       //const createdAt = new Date();
       //const author = 'Me';
       Collections.Site.insert({
-        _id, name, location
+        _id : pId,
+        name : pName,
+        location : pLocation
       });
     },
     'maintenance.updateSite'(selectedSite, location) {
