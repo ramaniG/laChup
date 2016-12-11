@@ -14,7 +14,7 @@ export default class extends React.Component {
     return (
       <div>
 
-        {/*  <NavHeader /> */}
+        <NavHeader />
 
         <div className="container">
 

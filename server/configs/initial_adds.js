@@ -1,6 +1,7 @@
 import {State, Country, Entity, Site, ServiceCounter, ServiceType} from '/lib/collections';
 
 export default function () {
+  addUser();
   addCountry();
   addStates();
   var entityID = addEntity();
@@ -14,6 +15,40 @@ export default function () {
 
   if (serviceID){
     addServiceCounter(siteID, serviceID.id1, serviceID.id2);
+  }
+}
+
+function addUser() {
+  if (Meteor.users.find().fetch().length === 0)
+  {
+    console.log('Creating users: ');
+
+    var users = [
+        {name:"Normal User",email:"normal@example.com",roles:[], group: 'user'},
+        {name:"Operator User",email:"operator@example.com",roles:['operator'], group: 'entity'},
+        {name:"SiteAdmin User",email:"site.admin@example.com",roles:['site-admin'], group: 'entity'},
+        {name:"EntityAdmin User",email:"entity.admin@example.com",roles:['entity-admin'], group: 'entity'},
+        {name:"SuperAdmin User",email:"super.admin@example.com",roles:['super-admin'], group: Roles.GLOBAL_GROUP}
+      ];
+
+    _.each(users, function (userData) {
+      var id,
+          user;
+
+      console.log(userData);
+
+      id = Accounts.createUser({
+        email: userData.email,
+        password: "apple1",
+        profile: { name: userData.name }
+      });
+
+      // email verification
+      Meteor.users.update({_id: id}, {$set:{'emails.0.verified': true}});
+
+      Roles.addUsersToRoles(id, userData.roles, userData.group);
+
+    });
   }
 }
 

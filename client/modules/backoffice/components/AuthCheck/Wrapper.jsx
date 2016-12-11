@@ -24,12 +24,12 @@ export default class extends React.Component {
       />
     );
 
-    const displayLogin = () => (
-      <LayoutDefault
+{/*    const displayLogin = () => (
+      <LoginLayout
         content={() => (<EntityLogin />)}
       />
     );
-
+*/}
     const displayDenied = () => (
       <LayoutDefault
         content={() => (<AuthDenied />)}
@@ -46,7 +46,6 @@ export default class extends React.Component {
       <ComponentCtx
         {...this.props}
         displayLoading={displayLoading}
-        displayLogin={displayLogin}
         displayDenied={displayDenied}
         displayContent={displayContent}
       />

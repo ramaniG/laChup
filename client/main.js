@@ -4,6 +4,7 @@ import initContext from './configs/context';
 // modules
 import coreModule from './modules/core';
 import backofficeModule from './modules/backoffice';
+import superadminModule from './modules/superadmin';
 // import appModule from './modules/app';
 
 // init context
@@ -14,4 +15,5 @@ const app = createApp(context);
 app.loadModule(coreModule);
 // app.loadModule(appModule);
 app.loadModule(backofficeModule);
+app.loadModule(superadminModule);
 app.init();
