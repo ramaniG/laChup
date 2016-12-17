@@ -1,20 +1,20 @@
 import React from 'react';
-import LeftMenu from './leftmenu.js'
-import './style.css';
+import StateSelection from './stateselection';
 
-const Component = ({content = () => null }, {subcontent = () => null}) => (
+const Component = ({content = () => null }) => (
   <div>
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-3 col-md-2 sidebar">
-          <LeftMenu />
-        </div>
-        <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 className="page-header">Sites Maintenance</h1>
-          {content()}
-        </div>
-      </div>
+    <header>
+    <h1>ChupLa</h1>
+    <StateSelection countryID="1"/>
+    </header>
+
+    <div>
+    {content()}
     </div>
+
+    <footer>
+    <small>CHUPLA</small>
+    </footer>
   </div>
 )
 
