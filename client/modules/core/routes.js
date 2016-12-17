@@ -4,6 +4,8 @@ import {Accounts} from 'meteor/accounts-base';
 
 import MainLayout from './components/mainlayout';
 import StateSelection from './containers/stateselection';
+import NewSite from '../sites/containers/newsite.js';
+import SiteMaintenance from '../sites/components/sitemaintenance.js';
 
 // import {
 //   AuthCheck,
@@ -97,5 +99,42 @@ export default function (injectDeps, {FlowRouter}) {
   //     // });
   //   }
   // });
+  
+  FlowRouter.route('/', {
+    name: 'main',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<StateSelection countryID="1" />)
+      });
+    }
+  });
 
+  FlowRouter.route('/sites/maintenance/:entityID', {
+    name: 'sites',
+    action(param) {
+      mount(MainLayoutCtx, {
+        content: () => (<SiteMaintenance pEntityID={param.entityID} />)
+      });
+    }
+  });
+
+  FlowRouter.route('/services/maintenance', {
+    name: 'services',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<NewSite countryID="1" />),
+        subcontent: () => (<StateSelection countryID="1" />)
+      });
+    }
+  });
+
+  FlowRouter.route('/users/maintenance', {
+    name: 'users',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<NewSite countryID="1" />),
+        subcontent: () => (<StateSelection countryID="1" />)
+      });
+    }
+  });
 }
