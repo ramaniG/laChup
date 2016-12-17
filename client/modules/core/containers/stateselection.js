@@ -5,7 +5,7 @@ export const composer = ({context, clearErrors, countryID}, onData) => {
   const {Meteor, Collections} = context();
   if (Meteor.subscribe('entity.allstates', countryID).ready()) {
     const states = Collections.State.find({countryID}).fetch();
-    onData(null, {states});
+    onData(null, {states, value : null});
   } else {
     onData();
   }
