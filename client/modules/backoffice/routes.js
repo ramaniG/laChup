@@ -12,8 +12,7 @@ import {
 
 import Register from './components/EntityRegister/Wrapper.jsx';
 import Login from './components/EntityLogin/Wrapper.jsx';
-import Landing from './components/LoginLanding/Wrapper.jsx';
-import Denied from './components/AuthDenied/Wrapper.jsx';
+import Denied from '../core/components/AuthDenied/Wrapper.jsx';
 import Password from './components/EntityPassword/Wrapper.jsx';
 import Profile from './components/EntityProfile/Wrapper.jsx';
 import Account from './components/EntityAccount/Wrapper.jsx';
@@ -76,21 +75,6 @@ export default function (injectDeps, {FlowRouter}) {
 
   FlowRouter.route('/landing', {
     name: 'app.landing',
-    // action() {
-    //   mount(AuthCheckCtx, {
-    //     LayoutDefault,
-    //     content: () => (<Landing />),
-    //     requireUserId: true
-    //   });
-    // }
-    // action() {
-    //   if(Roles.userIsInRole(Meteor.userId(), ['super-admin'], Roles.GLOBAL_GROUP)) {
-    //     FlowRouter.go('/secret');
-    //   } else {
-    //     FlowRouter.go('/normal-entity-path');
-    //   }
-    //   // });
-    // }
     triggersEnter: [function(context, redirect) {
       if(Roles.userIsInRole(Meteor.userId(), ['super-admin'], Roles.GLOBAL_GROUP)) {
         redirect('/create-entity');
