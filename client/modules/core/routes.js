@@ -21,7 +21,7 @@ import SiteMaintenance from '../sites/components/sitemaintenance.js';
 
 export default function (injectDeps, {FlowRouter}) {
   // const AuthCheckCtx = injectDeps(AuthCheck);
-  // const MainLayoutCtx = injectDeps(MainLayout);
+  const MainLayoutCtx = injectDeps(MainLayout);
 
   // FlowRouter.route('/', {
   //   name: 'main',
@@ -99,15 +99,15 @@ export default function (injectDeps, {FlowRouter}) {
   //     // });
   //   }
   // });
-  
-  FlowRouter.route('/', {
-    name: 'main',
-    action() {
-      mount(MainLayoutCtx, {
-        content: () => (<StateSelection countryID="1" />)
-      });
-    }
-  });
+
+  // FlowRouter.route('/', {
+  //   name: 'main',
+  //   action() {
+  //     mount(MainLayoutCtx, {
+  //       content: () => (<StateSelection countryID="1" />)
+  //     });
+  //   }
+  // });
 
   FlowRouter.route('/sites/maintenance/:entityID', {
     name: 'sites',
