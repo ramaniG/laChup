@@ -1,7 +1,7 @@
 
-import authComposer from '/client/modules/backoffice/lib/Auth.js';
-import {_authComposer, _authDepsMapper} from '/client/modules/backoffice/lib/Auth.js';
-import navHeaderComposer from '/client/modules/backoffice/lib/NavHeader.js';
+import authComposer from '/client/modules/core/lib/Auth.js';
+import {_authComposer, _authDepsMapper} from '/client/modules/core/lib/Auth.js';
+import navHeaderComposer from '/client/modules/core/lib/NavHeader.js';
 
 export {
 
