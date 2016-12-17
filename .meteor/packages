@@ -19,12 +19,8 @@ ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.2.1            # Server-side component of the `meteor shell` command
 
 kadira:flow-router
-reactive-dict
-audit-argument-checks
-check
-random
-accounts-base
-accounts-password
+reactive-dict@1.1.8
 audit-argument-checks@1.0.7
 check@1.2.4
 random@1.0.10
+twbs:bootstrap
