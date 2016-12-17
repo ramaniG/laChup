@@ -2,9 +2,9 @@ import React from 'react';
 
 import {navHeaderComposer} from '/client/configs/composers.js';
 
-import NavHeaderBrand from '/client/modules/backoffice/components/Theme/NavHeaderBrand.jsx';
-import NavHeaderLeftContent from '/client/modules/backoffice/components/Theme/NavHeaderLeftContent.jsx';
-import NavHeaderRightContent from '/client/modules/backoffice/components/Theme/NavHeaderRightContent.jsx';
+import NavHeaderBrand from '/client/modules/core/components/Theme/NavHeaderBrand.jsx';
+import NavHeaderLeftContent from '/client/modules/core/components/Theme/NavHeaderLeftContent.jsx';
+import NavHeaderRightContent from '/client/modules/core/components/Theme/NavHeaderRightContent.jsx';
 
 const NavHeaderLeftContentCtx = navHeaderComposer(NavHeaderLeftContent);
 const NavHeaderRightContentCtx = navHeaderComposer(NavHeaderRightContent);
