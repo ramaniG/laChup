@@ -12,6 +12,8 @@ import {
 
 import Register from './components/EntityRegister/Wrapper.jsx';
 import Login from './components/EntityLogin/Wrapper.jsx';
+import Landing from './components/LoginLanding/Wrapper.jsx';
+import Denied from './components/AuthDenied/Wrapper.jsx';
 import Password from './components/EntityPassword/Wrapper.jsx';
 import Profile from './components/EntityProfile/Wrapper.jsx';
 import Account from './components/EntityAccount/Wrapper.jsx';
@@ -20,14 +22,28 @@ export default function (injectDeps, {FlowRouter}) {
 
   const AuthCheckCtx = injectDeps(AuthCheck);
 
-  // FlowRouter.route('/', {
-  //   name: 'app.home',
-  //   action() {
-  //     mount(AuthCheckCtx, {
-  //       LayoutDefault, content: () => (<Simplest title="App main screen"/>)
-  //     });
-  //   }
-  // });
+  FlowRouter.route('/', {
+    name: 'app.home',
+    action() {
+      mount(AuthCheckCtx, {
+        LayoutDefault,
+        content: () => (<Simplest title="App main screen"/>),
+        requireUserId: true
+      });
+    }
+  });
+
+  FlowRouter.route('/denied', {
+    name: 'app.home',
+    action() {
+      mount(AuthCheckCtx, {
+        LayoutDefault,
+        content: () => (<Denied />),
+        requireUserId: false,
+        requireNotLoggedIn: false
+      });
+    }
+  });
 
   FlowRouter.notFound = {
     action() {
@@ -37,35 +53,83 @@ export default function (injectDeps, {FlowRouter}) {
     }
   };
 
-  FlowRouter.route('/register', {
-    name: 'app.register',
-    action() {
-      mount(AuthCheckCtx, {
-        LayoutDefault, content: () => (<Register />),
-        requireNotLoggedIn: true
-      });
-    }
-  });
-
-  FlowRouter.route('/', {
-    name: 'app.login',
-    action() {
-      mount(AuthCheckCtx, {
-        LayoutDefault, content: () => (<Login />),
-        requireNotLoggedIn: true
-      });
-    }
-  });
+  // FlowRouter.route('/register', {
+  //   name: 'app.register',
+  //   action() {
+  //     mount(AuthCheckCtx, {
+  //       LayoutDefault, content: () => (<Register />),
+  //       requireNotLoggedIn: true
+  //     });
+  //   }
+  // });
 
   FlowRouter.route('/login', {
     name: 'app.login',
     action() {
       mount(AuthCheckCtx, {
-        LayoutDefault, content: () => (<Login />),
+        LayoutDefault: LoginLayout,
+        content: () => (<Login />),
         requireNotLoggedIn: true
       });
     }
   });
+
+  FlowRouter.route('/landing', {
+    name: 'app.landing',
+    // action() {
+    //   mount(AuthCheckCtx, {
+    //     LayoutDefault,
+    //     content: () => (<Landing />),
+    //     requireUserId: true
+    //   });
+    // }
+    // action() {
+    //   if(Roles.userIsInRole(Meteor.userId(), ['super-admin'], Roles.GLOBAL_GROUP)) {
+    //     FlowRouter.go('/secret');
+    //   } else {
+    //     FlowRouter.go('/normal-entity-path');
+    //   }
+    //   // });
+    // }
+    triggersEnter: [function(context, redirect) {
+      if(Roles.userIsInRole(Meteor.userId(), ['super-admin'], Roles.GLOBAL_GROUP)) {
+        redirect('/create-entity');
+      } else {
+        redirect('/account');
+      }
+    }],
+    action: function(_params) {
+      throw new Error("this should not get called");
+    }
+  })
+
+  FlowRouter.route('/normal-entity-path', {
+    name: 'normal-entity-path',
+    action() {
+      mount(AuthCheckCtx, {
+        LayoutDefault: LoginLayout,
+
+        content: () => (<Profile />),
+        requireUserId: true,
+        requiredRole: ['operator', 'site-admin', 'entity-admin'],
+        requiredGroup: 'entity'
+      });
+    }
+  })
+
+  FlowRouter.route('/secret', {
+    name: 'secret',
+    action() {
+      mount(AuthCheckCtx, {
+        LayoutDefault,
+
+        content: () => (<Profile />),
+        requireUserId: true,
+        requiredRole: ['admin', 'super-admin'],
+        requiredGroup: 'entity'
+      });
+    }
+  })
 
   FlowRouter.route('/logout', {
     name: 'app.logout',

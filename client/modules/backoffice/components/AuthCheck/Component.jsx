@@ -2,14 +2,16 @@ import React from 'react';
 
 export default class extends React.Component {
 
-  exit(path = '/') {
-    const {displayLoading} = this.props;
+  // exit(path = '/login') {
+  //   const {displayLoading} = this.props;
+  //
+  //   setTimeout(function() {
+  //     FlowRouter.go(path);
+  //   }, 0);
+  //   return displayLoading();
+  // }
 
-    setTimeout(function() {
-      FlowRouter.go(path);
-    }, 0);
-    return displayLoading();
-  }
+
 
   render() {
 
@@ -20,27 +22,33 @@ export default class extends React.Component {
       userId,
       requireUserId,
       requireNotLoggedIn,
+      requiredRole,
+      requiredGroup,
 
     } = this.props;
 
-    const {
-      waitingForAuthData,
-    } = this.props;
-
-    if (waitingForAuthData) {
-      return displayLoading();
-    } else {
+    // const {
+    //   waitingForAuthData,
+    // } = this.props;
+    //
+    // if (waitingForAuthData) {
+    //   return displayLoading();
+    // } else {
 
       if (userId && requireNotLoggedIn) {
-        return this.exit();
+        FlowRouter.go('/');
       }
 
       if (!userId && requireUserId) {
-        return this.exit();
+        FlowRouter.go('/login');
+      }
+
+      if (requiredRole && requiredGroup && !Roles.userIsInRole(userId, requiredRole, requiredGroup)) {
+        FlowRouter.go('/');
       }
 
       return displayContent();
-    }
+    // }
   }
 
 }
