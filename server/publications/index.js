@@ -1,5 +1,5 @@
-import entity from './entity';
+import Entity from './entity';
 
 export default function () {
-  entity();
+  Entity();
 }

@@ -1,9 +1,9 @@
-import sites from './sites';
+import Entity from './entity';
 
 // XXX: Here, we can automatically generate this file based on the
 // actions inside this directory.
 const actions = {
-  sites
+  Entity
 };
 
 export default actions;

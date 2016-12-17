@@ -1,7 +1,7 @@
 import ticket from './ticket';
-import Site from './site';
+import Entity from './entity';
 
 export default function () {
   ticket();
-  Site();
+  Entity();
 }
