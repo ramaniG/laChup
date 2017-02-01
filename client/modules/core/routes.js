@@ -6,6 +6,7 @@ import MainLayout from './components/mainlayout';
 import StateSelection from './containers/stateselection';
 import NewSite from '../sites/containers/newsite.js';
 import SiteMaintenance from '../sites/components/sitemaintenance.js';
+import NewService from '../services/components/siteselection.js';
 
 // import {
 //   AuthCheck,
@@ -122,8 +123,8 @@ export default function (injectDeps, {FlowRouter}) {
     name: 'services',
     action() {
       mount(MainLayoutCtx, {
-        content: () => (<NewSite countryID="1" />),
-        subcontent: () => (<StateSelection countryID="1" />)
+        content: () => (<NewService />)
+        //subcontent: () => (<StateSelection countryID="1" />)
       });
     }
   });

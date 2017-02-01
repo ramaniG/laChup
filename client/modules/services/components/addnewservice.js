@@ -63,4 +63,4 @@ class AddNewServices extends React.Component {
   }
 }
 
-export default AddNewSite;
+export default AddNewServices;
